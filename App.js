@@ -19,6 +19,16 @@ const App = () => {
   const DRONE_PORT = 8889;
   const HOST = '192.168.10.1';
 
+  const stateParser = (msg) => {
+    const buffer = _.map(_.split(msg, ';'), (state) => {
+      if (state !== '') {
+        return _.split(state, ':');
+      }
+    });
+    const buf2 = _.pull(buffer, undefined);
+    return _.fromPairs(buf2, 'agx');
+  };
+
   useEffect(() => {
     const state = dgram.createSocket('udp4');
 
@@ -28,10 +38,10 @@ const App = () => {
       'message',
       _.throttle((message) => {
         console.log(`🚁  ${message}`);
-        setDroneState(message);
+        setDroneState(stateParser(message));
       }, 15000),
     );
-  },[]);
+  }, []);
 
   useEffect(() => {
     const socket = dgram.createSocket('udp4');

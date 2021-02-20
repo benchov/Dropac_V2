@@ -8,23 +8,42 @@ import {
   Button,
 } from 'react-native';
 import dgram from 'react-native-udp';
+import _ from 'lodash';
 
 const App = () => {
   const [command, setCommand] = React.useState('command');
-  const [connetcted, setConnetcted] = useState(false);
+  const [stateStream, handleStateStream] = useState(false);
+  const [droneState, setDroneState] = useState('');
+
+  const STATE_PORT = 8890;
+  const DRONE_PORT = 8889;
+  const HOST = '192.168.10.1';
+
+  useEffect(() => {
+    const state = dgram.createSocket('udp4');
+
+    state.bind(STATE_PORT, '0.0.0.0');
+
+    state.on(
+      'message',
+      _.throttle((message) => {
+        console.log(`🚁  ${message}`);
+        setDroneState(message);
+      }, 15000),
+    );
+  },[]);
 
   useEffect(() => {
     const socket = dgram.createSocket('udp4');
-    const remotePort = 8889;
-    const remoteHost = '192.168.10.1';
-    socket.bind(remotePort);
+
+    socket.bind(DRONE_PORT);
     socket.once('listening', function () {
       socket.send(
         command,
         undefined,
         undefined,
-        remotePort,
-        remoteHost,
+        DRONE_PORT,
+        HOST,
         function (err) {
           if (err) {
             throw err;
@@ -34,15 +53,16 @@ const App = () => {
         },
       );
     });
-  },[command]);
+  }, [command]);
 
   return (
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
       <View style={styles.main}>
-        <Text>{connetcted ? 'Connected' : 'Not Connected'}</Text>
+        <Text>{droneState}</Text>
         <Button title="takeoff" onPress={() => setCommand('takeoff')} />
         <Button title="land" onPress={() => setCommand('land')} />
+        <Button title="state" onPress={() => handleStateStream(!stateStream)} />
         <Button title="connect" onPress={() => setCommand('connect')} />
       </View>
     </>
@@ -52,8 +72,10 @@ const App = () => {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
+    marginTop: 150,
+    marginBottom: 150,
   },
 });
 

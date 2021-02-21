@@ -5409,6 +5409,13 @@ react-native-gesture-handler@^1.9.0:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-sensors@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-sensors/-/react-native-sensors-7.2.0.tgz#e7fa3f7392eece19549c8af99617e26ebae1ca73"
+  integrity sha512-SGTlLqgUju5NwkPteYRBS6HxpqrmxdniDRJN4Waq7ip33JqrDhQU1htrUJRcp91LIpxcctFbDDfo7j66mK/Aew==
+  dependencies:
+    rxjs ">= 6"
+
 react-native-tcp-socket@^4.5.5:
   version "4.5.5"
   resolved "https://registry.yarnpkg.com/react-native-tcp-socket/-/react-native-tcp-socket-4.5.5.tgz#64d73d630e3e8be7250d35c5c4d38d7034041334"
@@ -5769,7 +5776,7 @@ rx-lite@*, rx-lite@^4.0.8:
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-4.0.8.tgz#0b1e11af8bc44836f04a6407e92da42467b79444"
   integrity sha1-Cx4Rr4vESDbwSmQH6S2kJGe3lEQ=
 
-rxjs@^6.6.0:
+"rxjs@>= 6", rxjs@^6.6.0:
   version "6.6.3"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.3.tgz#8ca84635c4daa900c0d3967a6ee7ac60271ee552"
   integrity sha512-trsQc+xYYXZ3urjOiJOuCOa5N3jAZ3eiSpQB5hIT8zGlL2QfnHLJ2r7GMkBGuIausdJN1OneaI6gQlsqNHHmZQ==

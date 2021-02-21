@@ -8,6 +8,8 @@ target 'Dropac_V2' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNSensors', :path => '../node_modules/react-native-sensors'
+
   target 'Dropac_V2Tests' do
     inherit! :complete
     # Pods for testing

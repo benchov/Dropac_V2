@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import dgram from 'react-native-udp';
 import _ from 'lodash';
-import stateParser from './util/index';
 import { stateParser, filterAndRound } from './util';
 
 const App = () => {

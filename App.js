@@ -70,7 +70,7 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
       <View style={styles.main}>
-        <Text>{droneState}</Text>
+        {/* <Text>{droneState}</Text> */}
         <Button title="takeoff" onPress={() => setCommand('takeoff')} />
         <Button title="land" onPress={() => setCommand('land')} />
         <Button title="state" onPress={() => handleStateStream(!stateStream)} />

@@ -10,6 +10,7 @@ import {
 import dgram from 'react-native-udp';
 import _ from 'lodash';
 import stateParser from './util/index';
+import { stateParser, filterAndRound } from './util';
 
 const App = () => {
   const [command, setCommand] = React.useState('command');

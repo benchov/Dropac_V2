@@ -29,6 +29,7 @@ const App = () => {
     return _.fromPairs(buf2, 'agx');
   };
 
+  // GET DRONE STATE
   useEffect(() => {
     const state = dgram.createSocket('udp4');
 
@@ -43,6 +44,7 @@ const App = () => {
     );
   }, []);
 
+  // SEND COMMAND
   useEffect(() => {
     const socket = dgram.createSocket('udp4');
 
@@ -58,7 +60,6 @@ const App = () => {
           if (err) {
             throw err;
           }
-
           console.log('Message sent!', command);
         },
       );

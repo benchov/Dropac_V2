@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import dgram from 'react-native-udp';
 import _ from 'lodash';
+import stateParser from './util/index';
 
 const App = () => {
   const [command, setCommand] = React.useState('command');
@@ -18,16 +19,6 @@ const App = () => {
   const STATE_PORT = 8890;
   const DRONE_PORT = 8889;
   const HOST = '192.168.10.1';
-
-  const stateParser = (msg) => {
-    const buffer = _.map(_.split(msg, ';'), (state) => {
-      if (state !== '') {
-        return _.split(state, ':');
-      }
-    });
-    const buf2 = _.pull(buffer, undefined);
-    return _.fromPairs(buf2, 'agx');
-  };
 
   // GET DRONE STATE
   useEffect(() => {

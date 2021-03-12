@@ -69,8 +69,8 @@ const App = () => {
   }, [sensorState])
 
   // HANDLE SENSOR DATA
-  setUpdateIntervalForType(SensorTypes.accelerometer, 1600);
-  const subscription = accelerometer.subscribe((data) =>{
+  setUpdateIntervalForType(SensorTypes.accelerometer, 400);
+  const subscription = accelerometer.subscribe((data) => {
     setSensorState(data);
   }
   );

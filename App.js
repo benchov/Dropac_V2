@@ -62,12 +62,9 @@ const App = () => {
   }, [command]);
 
   useEffect(() => {
-    setCommand(`rc 
-        ${filterAndRound(-sensorState.x)} 
-        ${filterAndRound(sensorState.y)}   
-        ${0} 
-        ${0}
-    `);
+    if (gyroIsActive) {
+      setCommand(`rc ${filterAndRound(sensorState.x) * -1} ${filterAndRound(sensorState.y *-1)} ${0} ${0}`);
+    }
     // console.log('command in app: ', command)
 }, [sensorState])
 

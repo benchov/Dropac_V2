@@ -14,7 +14,7 @@ export const filterAndRound = (number)=> {
     const buffer = Math.floor(number * 1000) / 100;
     
     if ( (buffer > 10 && buffer > 0) || (buffer < -10 && buffer < 0) ) {
-        return buffer
+        return Math.round(buffer)
     }
     return 0;
 }

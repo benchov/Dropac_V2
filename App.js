@@ -88,25 +88,33 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
-      <View style={styles.main}>
+      <View style={styles.container}>
         {/* <Text>{droneState}</Text> */}
-        <Button title="takeoff" onPress={() => setCommand('takeoff')} />
-        <Button title="land" onPress={() => setCommand('land')} />
-        <Button title="state" onPress={() => handleStateStream(!stateStream)} />
-        <Button title="sensor off" onPress={()=> subscription.unsubscribe()} />
-        <Button title="connect" onPress={() => setCommand('connect')} />
+        <View style={styles.main}>
+          <Button title="takeoff" onPress={() => setCommand('takeoff')} />
+          <Button title="land" onPress={() => setCommand('land')} />
+          <Button title="stop" onPress={() => setCommand('rc 0 0 0 0')} />
+          <Button title="connect" onPress={() => setCommand('connect')} />
+          <Button title="emergency" color='#DD1C1A' onPress={() => setCommand('emergency')} />
+        </View>
+        <DButton pressed={(v) => handleGyroActive(v)} />
       </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 10
+  },
   main: {
     flex: 1,
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 150,
-    marginBottom: 150,
+    marginTop: 50,
+    marginBottom: 50,
   },
 });
 

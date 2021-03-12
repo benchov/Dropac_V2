@@ -12,6 +12,7 @@ import _ from 'lodash';
 import { accelerometer, setUpdateIntervalForType, SensorTypes } from "react-native-sensors";
 import { map, filter } from "rxjs/operators";
 import { stateParser, filterAndRound } from './util';
+import DButton from './components/DButton'
 
 const App = () => {
   const [command, setCommand] = React.useState('command');

@@ -32,9 +32,7 @@ const App = () => {
   // GET DRONE STATE
   useEffect(() => {
     const state = dgram.createSocket('udp4');
-
     state.bind(STATE_PORT, '0.0.0.0');
-
     state.on(
       'message',
       _.throttle((message) => {
@@ -68,9 +66,8 @@ const App = () => {
 
   useEffect(() => {
     if (gyroIsActive) {
-      setCommand(`rc ${filterAndRound(sensorState.x) * -1} ${filterAndRound(sensorState.y *-1)} ${0} ${0}`);
+      setCommand(`rc ${filterAndRound(sensorState.x) * -1} ${filterAndRound(sensorState.y * -1)} ${0} ${0}`);
     }
-    // console.log('command in app: ', command)
   }, [sensorState])
 
   // HANDLE SENSOR DATA

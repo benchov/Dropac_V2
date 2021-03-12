@@ -75,6 +75,13 @@ const App = () => {
   }
   );
 
+  const handleGyroActive = (value) => {
+    setGyroActive(value)
+    if (!value) {
+      setCommand('rc 0 0 0 0');
+    }
+  }
+
   return (
     <>
       <StatusBar barStyle="dark-content" hidden={true} />

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const stateParser = (msg) => {
     const buffer = _.map(_.split(msg, ';'), (state) => {
         if (state !== '') {

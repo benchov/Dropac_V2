@@ -25,6 +25,8 @@ const App = () => {
   const [stateStream, handleStateStream] = useState(false);
   const [droneState, setDroneState] = useState('');
   const [sensorState, setSensorState] = useState({ x: 0, y: 0, z: 0 });
+  const [gyroIsActive, setGyroActive] = useState(false);
+
 
 
   // GET DRONE STATE

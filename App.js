@@ -43,12 +43,12 @@ const App = () => {
   }, []);
 
   // SEND COMMAND
-  useEffect(() => {
-    const socket = dgram.createSocket('udp4');
 
-    socket.bind(DRONE_PORT);
-    socket.once('listening', function () {
-      socket.send(
+  useEffect(() => {
+    const socketForCommand = dgram.createSocket('udp4');
+    socketForCommand.bind(DRONE_PORT);
+    socketForCommand.once('listening', function () {
+      socketForCommand.send(
         command,
         undefined,
         undefined,

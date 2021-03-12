@@ -14,15 +14,18 @@ import { map, filter } from "rxjs/operators";
 import { stateParser, filterAndRound } from './util';
 import DButton from './components/DButton'
 
+const STATE_PORT = 8890;
+const DRONE_PORT = 8889;
+const HOST = '192.168.10.1';
+
+
+
 const App = () => {
   const [command, setCommand] = React.useState('command');
   const [stateStream, handleStateStream] = useState(false);
   const [droneState, setDroneState] = useState('');
   const [sensorState, setSensorState] = useState({ x: 0, y: 0, z: 0 });
 
-  const STATE_PORT = 8890;
-  const DRONE_PORT = 8889;
-  const HOST = '192.168.10.1';
 
   // GET DRONE STATE
   useEffect(() => {

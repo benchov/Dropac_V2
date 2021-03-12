@@ -18,7 +18,7 @@ const App = () => {
   const [command, setCommand] = React.useState('command');
   const [stateStream, handleStateStream] = useState(false);
   const [droneState, setDroneState] = useState('');
-  const [sensorState, setSensorState] = useState({x: 0, y:0,z:0 });
+  const [sensorState, setSensorState] = useState({ x: 0, y: 0, z: 0 });
 
   const STATE_PORT = 8890;
   const DRONE_PORT = 8889;
@@ -55,7 +55,7 @@ const App = () => {
           if (err) {
             throw err;
           }
-          console.log('Message sent!', command);
+          console.log('CMD >>', command);
         },
       );
     });
@@ -66,7 +66,7 @@ const App = () => {
       setCommand(`rc ${filterAndRound(sensorState.x) * -1} ${filterAndRound(sensorState.y *-1)} ${0} ${0}`);
     }
     // console.log('command in app: ', command)
-}, [sensorState])
+  }, [sensorState])
 
   // HANDLE SENSOR DATA
   setUpdateIntervalForType(SensorTypes.accelerometer, 1600);

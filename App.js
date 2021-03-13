@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import dgram from 'react-native-udp';
 import _ from 'lodash';
-import { accelerometer, setUpdateIntervalForType, SensorTypes } from "react-native-sensors";
+import { accelerometer,gyroscope, setUpdateIntervalForType, SensorTypes } from "react-native-sensors";
 import { map, filter } from "rxjs/operators";
 import { stateParser, filterAndRound } from './util';
 import DButton from './components/DButton'
@@ -71,11 +71,15 @@ const App = () => {
   }, [sensorState])
 
   // HANDLE SENSOR DATA
-  setUpdateIntervalForType(SensorTypes.accelerometer, 400);
-  const subscription = accelerometer.subscribe((data) => {
+  setUpdateIntervalForType(SensorTypes.gyroscope, 5400);
+  const subscriptionAccelometer = accelerometer.subscribe((data) => {
     setSensorState(data);
   }
   );
+
+  const subscriptionGyroscope = gyroscope.subscribe(({ x, y, z}) =>
+  console.log({ x, y, z})
+);
 
   const handleGyroActive = (value) => {
     setGyroActive(value)

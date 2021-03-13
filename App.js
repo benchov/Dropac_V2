@@ -93,6 +93,7 @@ const App = () => {
       <StatusBar barStyle="dark-content" hidden={true} />
       <View style={styles.container}>
         {/* <Text>{droneState}</Text> */}
+        <DButton pressed={(v) => handleGyroActive(v)} />
         <View style={styles.main}>
           <Button title="takeoff" onPress={() => setCommand('takeoff')} />
           <Button title="land" onPress={() => setCommand('land')} />

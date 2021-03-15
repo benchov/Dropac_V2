@@ -13,6 +13,7 @@ import { accelerometer,gyroscope, setUpdateIntervalForType, SensorTypes } from "
 import { map, filter } from "rxjs/operators";
 import { stateParser, filterAndRound } from './util';
 import DButton from './components/DButton'
+import AltButton from './components/AltButton';
 
 const STATE_PORT = 8890;
 const DRONE_PORT = 8889;
@@ -100,8 +101,10 @@ const App = () => {
           <Button title="stop" onPress={() => setCommand('rc 0 0 0 0')} />
           <Button title="connect" onPress={() => setCommand('connect')} />
           <Button title="emergency" color='#DD1C1A' onPress={() => setCommand('emergency')} />
+        <View style={styles.main}>
+          <AltButton name='UP'/>
+          <AltButton name='DOWN'/>
         </View>
-        <DButton pressed={(v) => handleGyroActive(v)} />
       </View>
     </>
   );

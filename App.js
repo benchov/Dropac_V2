@@ -8,7 +8,7 @@ import {
   Button,
 } from 'react-native';
 import dgram from 'react-native-udp';
-import _ from 'lodash';
+import _, { set } from 'lodash';
 import {
   accelerometer,
   gyroscope,
@@ -94,6 +94,14 @@ const App = () => {
     }
   };
 
+  const handlePressAltitude = (value) => {
+    if (!value) {
+      setCommand('rc 0 0 0 0');
+    } else {
+      setCommand(value);
+    }
+  }
+
   return (
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
@@ -112,8 +120,8 @@ const App = () => {
           />
         </View>
         <View style={styles.main}>
-          <AltButton name='UP'/>
-          <AltButton name='DOWN'/>
+          <AltButton name='up' pressed={(v) => handlePressAltitude(v)}/>
+          <AltButton name='down' pressed={(v) => handlePressAltitude(v)}/>
         </View>
       </View>
     </>

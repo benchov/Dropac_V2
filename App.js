@@ -9,14 +9,13 @@ import {
   TextInput,
 } from 'react-native';
 import dgram from 'react-native-udp';
-import _, { set } from 'lodash';
+import _, {set} from 'lodash';
 import {
   accelerometer,
   gyroscope,
   setUpdateIntervalForType,
   SensorTypes,
 } from 'react-native-sensors';
-import {map, filter} from 'rxjs/operators';
 import {stateParser, filterAndRound} from './util';
 import DButton from './components/DButton';
 import AltButton from './components/AltButton';
@@ -48,7 +47,6 @@ const App = () => {
   }, []);
 
   // SEND COMMAND
-
   useEffect(() => {
     const socketForCommand = dgram.createSocket('udp4');
     socketForCommand.bind(DRONE_PORT);
@@ -102,7 +100,7 @@ const App = () => {
     } else {
       setCommand(value);
     }
-  }
+  };
 
   const handleCommandHeadline = (value) => {
     if (value !== Buffer[0]) {
@@ -145,8 +143,8 @@ const App = () => {
           />
         </View>
         <View style={styles.main}>
-          <AltButton name='up' pressed={(v) => handlePressAltitude(v)}/>
-          <AltButton name='down' pressed={(v) => handlePressAltitude(v)}/>
+          <AltButton name="up" pressed={(v) => handlePressAltitude(v)} />
+          <AltButton name="down" pressed={(v) => handlePressAltitude(v)} />
         </View>
       </View>
     </>

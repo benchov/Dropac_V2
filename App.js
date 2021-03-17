@@ -6,6 +6,7 @@ import {
   Text,
   StatusBar,
   Button,
+  TextInput,
 } from 'react-native';
 import dgram from 'react-native-udp';
 import _, { set } from 'lodash';
@@ -23,7 +24,7 @@ import AltButton from './components/AltButton';
 const STATE_PORT = 8890;
 const DRONE_PORT = 8889;
 const HOST = '192.168.10.1';
-
+let Buffer = [];
 const App = () => {
   const [command, setCommand] = React.useState('command');
   const [stateStream, handleStateStream] = useState(false);
@@ -31,6 +32,7 @@ const App = () => {
   const [sensorState, setSensorState] = useState({x: 0, y: 0, z: 0});
   const [gyroState, setGyroState] = useState({x: 0, y: 0, z: 0});
   const [gyroIsActive, setGyroActive] = useState(false);
+  const [text, setText] = React.useState(['Useless Multiline Placeholder']);
 
   // GET DRONE STATE
   useEffect(() => {
@@ -102,13 +104,36 @@ const App = () => {
     }
   }
 
+  const handleCommandHeadline = (value) => {
+    if (value !== Buffer[0]) {
+      Buffer.unshift(value);
+    }
+    return Buffer.map((line) => `\n${line}`);
+    //  console.log(Buffer);
+  };
   return (
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
+      <View
+        style={{
+          width: '100%',
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex: -99,
+          // backgroundColor: 'white',
+          // borderBottomColor: '#000000',
+          // borderBottomWidth: 1,
+        }}>
+        <Text style={{letterSpacing: 16, lineHeight: 20, color: 'darkgrey'}}>
+          {handleCommandHeadline(command)}
+        </Text>
+      </View>
       <View style={styles.container}>
         <DButton pressed={(v) => handleGyroActive(v)} />
         <View style={styles.main}>
-          <Text>{filterAndRound(gyroState.z, 'gyro')}</Text>
+          {/* <Text>{filterAndRound(gyroState.z, 'gyro')}</Text> */}
           <Button title="takeoff" onPress={() => setCommand('takeoff')} />
           <Button title="land" onPress={() => setCommand('land')} />
           <Button title="stop" onPress={() => setCommand('rc 0 0 0 0')} />
@@ -134,6 +159,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     paddingHorizontal: 10,
+    opacity: 0.7,
   },
   main: {
     flex: 1,

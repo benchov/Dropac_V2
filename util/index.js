@@ -13,18 +13,21 @@ export const stateParser = (msg) => {
 export const filterAndRound = (number, type) => {
   const buffer = Math.floor(number * 1000) / 100;
 
-  if (type === 'gyro') {
-    // if (buffer > 8 && buffer > 0) {
-    //   return 50;
-    // }
-    // if (buffer < -8 && buffer < 0) {
-    //   return -50;
-    // }
-    return Math.round(buffer) * 5;
+  if (type === 'gyroscope') {
+    if (buffer > 8 && buffer > 0) {
+        return 50;
+    }
+    if (buffer < -8 && buffer < 0) {
+      return -50;
+    }
+    // return Math.round(buffer) * 5;
+    return 0;
   }
 
-  if ((buffer > 10 && buffer > 0) || (buffer < -10 && buffer < 0)) {
-    return Math.round(buffer);
+  if (type === 'accelerometer') {
+    if ((buffer > 10 && buffer > 0) || (buffer < -10 && buffer < 0)) {
+      return Math.round(buffer);
+    }
+    return 0;
   }
-  return 0;
 };

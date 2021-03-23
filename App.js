@@ -138,9 +138,8 @@ const App = () => {
         </Text>
       </View>
       <View style={styles.container}>
-        <DButton pressed={(v) => handleGyroActive(v)} />
+        <AltButton name="gyro" pressed={(v) => handleGyroActive(v)} />
         <View style={styles.main}>
-          {/* <Text>{filterAndRound(gyroState.z, 'gyro')}</Text> */}
           <Button title="takeoff" onPress={() => setCommand('takeoff')} />
           <Button title="land" onPress={() => setCommand('land')} />
           <Button title="stop" onPress={() => setCommand('rc 0 0 0 0')} />

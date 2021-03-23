@@ -31,6 +31,7 @@ const App = () => {
   const [sensorState, setSensorState] = useState({x: 0, y: 0, z: 0});
   const [gyroState, setGyroState] = useState({x: 0, y: 0, z: 0});
   const [gyroIsActive, setGyroActive] = useState(false);
+  const [altitude, setAltitude] = useState(0);
   const [text, setText] = React.useState(['Useless Multiline Placeholder']);
 
   // GET DRONE STATE
@@ -70,12 +71,14 @@ const App = () => {
   useEffect(() => {
     if (gyroIsActive) {
       setCommand(
-        `rc ${filterAndRound(sensorState.y )} ${
-          filterAndRound(sensorState.x) * -1
-        } ${0} ${filterAndRound(gyroState.z, 'gyro') * -1}`,
+        `rc ${filterAndRound(sensorState.y, 'accelerometer')} ${
+          filterAndRound(sensorState.x, 'accelerometer') * -1
+        } ${altitude} ${filterAndRound(gyroState.z, 'gyroscope') * -1}`,
       );
+    } else {
+      setCommand(`rc ${0} ${0} ${altitude} ${0}`);
     }
-  }, [sensorState]);
+  }, [gyroIsActive && sensorState, altitude]);
 
   // HANDLE SENSOR DATA
   setUpdateIntervalForType(SensorTypes.accelerometer, 400);
@@ -94,11 +97,17 @@ const App = () => {
     }
   };
 
-  const handlePressAltitude = (value) => {
+  const handlePressAltitude = (value, direction) => {
+    console.log('handlePress ', direction);
     if (!value) {
-      setCommand('rc 0 0 0 0');
+      setAltitude(0);
     } else {
-      setCommand(value);
+      if (direction === 'up') {
+        setAltitude(50);
+      }
+      if (direction === 'down') {
+        setAltitude(-50);
+      }
     }
   };
 
@@ -143,8 +152,11 @@ const App = () => {
           />
         </View>
         <View style={styles.main}>
-          <AltButton name="up" pressed={(v) => handlePressAltitude(v)} />
-          <AltButton name="down" pressed={(v) => handlePressAltitude(v)} />
+          <AltButton name="up" pressed={(v, d) => handlePressAltitude(v, d)} />
+          <AltButton
+            name="down"
+            pressed={(v, d) => handlePressAltitude(v, d)}
+          />
         </View>
       </View>
     </>

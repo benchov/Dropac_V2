@@ -20,11 +20,12 @@ import {stateParser, filterAndRound} from './util';
 import AltitudeSelector from './components/AltitudeSelector';
 import MotionActivator from './components/MotionActivator';
 import MainFunctionButtons from './components/MainFunctionButtons';
+import CommandStream from './components/CommandStream';
 
 const STATE_PORT = 8890;
 const DRONE_PORT = 8889;
 const HOST = '192.168.10.1';
-let Buffer = [];
+
 const App = () => {
   const [command, setCommand] = React.useState('command');
   const [stateStream, handleStateStream] = useState(false);
@@ -33,7 +34,6 @@ const App = () => {
   const [gyroState, setGyroState] = useState({x: 0, y: 0, z: 0});
   const [gyroIsActive, setGyroActive] = useState(false);
   const [altitude, setAltitude] = useState(0);
-  const [text, setText] = React.useState(['Useless Multiline Placeholder']);
 
   // GET DRONE STATE
   useEffect(() => {
@@ -98,32 +98,10 @@ const App = () => {
     }
   };
 
-  const handleCommandHeadline = (value) => {
-    if (value !== Buffer[0]) {
-      Buffer.unshift(value);
-    }
-    return Buffer.map((line) => `\n${line}`);
-    //  console.log(Buffer);
-  };
   return (
     <>
       <StatusBar barStyle="dark-content" hidden={true} />
-      <View
-        style={{
-          width: '100%',
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          zIndex: -99,
-          // backgroundColor: 'white',
-          // borderBottomColor: '#000000',
-          // borderBottomWidth: 1,
-        }}>
-        <Text style={{letterSpacing: 16, lineHeight: 20, color: 'darkgrey'}}>
-          {handleCommandHeadline(command)}
-        </Text>
-      </View>
+      <CommandStream command={command} />
       <View style={styles.container}>
         <MotionActivator isActive={(v) => handleGyroActive(v)} />
         <MainFunctionButtons pressedCommand={(command) => setCommand(command)} />
@@ -140,14 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 10,
     opacity: 0.7,
-  },
-  main: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 50,
-    marginBottom: 50,
-  },
+  }
 });
 
 export default App;

@@ -97,20 +97,6 @@ const App = () => {
     }
   };
 
-  const handlePressAltitude = (value, direction) => {
-    console.log('handlePress ', direction);
-    if (!value) {
-      setAltitude(0);
-    } else {
-      if (direction === 'up') {
-        setAltitude(50);
-      }
-      if (direction === 'down') {
-        setAltitude(-50);
-      }
-    }
-  };
-
   const handleCommandHeadline = (value) => {
     if (value !== Buffer[0]) {
       Buffer.unshift(value);

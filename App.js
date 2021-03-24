@@ -17,8 +17,8 @@ import {
   SensorTypes,
 } from 'react-native-sensors';
 import {stateParser, filterAndRound} from './util';
-import SmartButton from './components/subcomponents/SmartButton';
 import AltitudeSelector from './components/AltitudeSelector';
+import MotionActivator from './components/MotionActivator';
 
 const STATE_PORT = 8890;
 const DRONE_PORT = 8889;
@@ -124,7 +124,7 @@ const App = () => {
         </Text>
       </View>
       <View style={styles.container}>
-        <SmartButton name="gyro" pressed={(v) => handleGyroActive(v)} />
+        <MotionActivator isActive={(v) => handleGyroActive(v)} />
         <View style={styles.main}>
           <Button title="takeoff" onPress={() => setCommand('takeoff')} />
           <Button title="land" onPress={() => setCommand('land')} />

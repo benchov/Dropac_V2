@@ -17,8 +17,7 @@ import {
   SensorTypes,
 } from 'react-native-sensors';
 import {stateParser, filterAndRound} from './util';
-import DButton from './components/DButton';
-import AltButton from './components/AltButton';
+import SmartButton from './components/subcomponents/SmartButton';
 import AltitudeSelector from './components/AltitudeSelector';
 
 const STATE_PORT = 8890;
@@ -139,7 +138,7 @@ const App = () => {
         </Text>
       </View>
       <View style={styles.container}>
-        <AltButton name="gyro" pressed={(v) => handleGyroActive(v)} />
+        <SmartButton name="gyro" pressed={(v) => handleGyroActive(v)} />
         <View style={styles.main}>
           <Button title="takeoff" onPress={() => setCommand('takeoff')} />
           <Button title="land" onPress={() => setCommand('land')} />

@@ -19,6 +19,7 @@ import {
 import {stateParser, filterAndRound} from './util';
 import DButton from './components/DButton';
 import AltButton from './components/AltButton';
+import AltitudeSelector from './components/AltitudeSelector';
 
 const STATE_PORT = 8890;
 const DRONE_PORT = 8889;
@@ -150,13 +151,7 @@ const App = () => {
             onPress={() => setCommand('emergency')}
           />
         </View>
-        <View style={styles.main}>
-          <AltButton name="up" pressed={(v, d) => handlePressAltitude(v, d)} />
-          <AltButton
-            name="down"
-            pressed={(v, d) => handlePressAltitude(v, d)}
-          />
-        </View>
+        <AltitudeSelector pressedAltitude={(altValue) => setAltitude(altValue) } />
       </View>
     </>
   );

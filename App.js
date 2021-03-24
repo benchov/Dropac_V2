@@ -19,6 +19,7 @@ import {
 import {stateParser, filterAndRound} from './util';
 import AltitudeSelector from './components/AltitudeSelector';
 import MotionActivator from './components/MotionActivator';
+import MainFunctionButtons from './components/MainFunctionButtons';
 
 const STATE_PORT = 8890;
 const DRONE_PORT = 8889;
@@ -125,17 +126,7 @@ const App = () => {
       </View>
       <View style={styles.container}>
         <MotionActivator isActive={(v) => handleGyroActive(v)} />
-        <View style={styles.main}>
-          <Button title="takeoff" onPress={() => setCommand('takeoff')} />
-          <Button title="land" onPress={() => setCommand('land')} />
-          <Button title="stop" onPress={() => setCommand('rc 0 0 0 0')} />
-          <Button title="connect" onPress={() => setCommand('connect')} />
-          <Button
-            title="emergency"
-            color="#DD1C1A"
-            onPress={() => setCommand('emergency')}
-          />
-        </View>
+        <MainFunctionButtons pressedCommand={(command) => setCommand(command)} />
         <AltitudeSelector pressedAltitude={(altValue) => setAltitude(altValue) } />
       </View>
     </>

@@ -1,15 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
   View,
-  Text,
   StatusBar,
-  Button,
-  TextInput,
 } from 'react-native';
 import dgram from 'react-native-udp';
-import _, {set} from 'lodash';
+import _ from 'lodash';
 import {
   accelerometer,
   gyroscope,

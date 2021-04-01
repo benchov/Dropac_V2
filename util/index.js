@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { gyroscope } from 'react-native-sensors';
 
 export const stateParser = (msg) => {
   const buffer = _.map(_.split(msg, ';'), (state) => {
@@ -13,11 +14,25 @@ export const stateParser = (msg) => {
 export const filterAndRound = (number, type) => {
   const buffer = Math.floor(number * 1000) / 100;
 
+  // REMOVED :: not consistent sensor data
+//   if(type === 'accelerometerZ') {
+//     console.log('AZ ', buffer);
+
+//     if (buffer > 120 ) {
+//         return -50;
+//     }
+//     if (buffer < 70) {
+//       return 50;
+//     }
+//     return 0;
+//   }
+
   if (type === 'gyroscope') {
-    if (buffer > 8 && buffer > 0) {
+    console.log('GZ ', buffer)
+    if (buffer > 10) {
         return 50;
     }
-    if (buffer < -8 && buffer < 0) {
+    if (buffer < -1 ) {
       return -50;
     }
     // return Math.round(buffer) * 5;

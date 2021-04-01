@@ -1,9 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  View,
-  StatusBar,
-} from 'react-native';
+import {StyleSheet, View, StatusBar} from 'react-native';
 import dgram from 'react-native-udp';
 import _ from 'lodash';
 import {
@@ -59,7 +55,7 @@ const App = () => {
           if (err) {
             throw err;
           }
-          console.log('CMD ::', command);
+          // console.log('CMD ::', command);
         },
       );
     });
@@ -70,7 +66,9 @@ const App = () => {
       setCommand(
         `rc ${filterAndRound(sensorState.y, 'accelerometer')} ${
           filterAndRound(sensorState.x, 'accelerometer') * -1
-        } ${altitude} ${filterAndRound(gyroState.z, 'gyroscope') * -1}`,
+        } ${altitude} ${
+          filterAndRound(gyroState.z, 'gyroscope') * -1
+        }`,
       );
     } else {
       setCommand(`rc ${0} ${0} ${altitude} ${0}`);
@@ -100,8 +98,12 @@ const App = () => {
       <CommandStream command={command} />
       <View style={styles.container}>
         <MotionActivator isActive={(v) => handleGyroActive(v)} />
-        <MainFunctionButtons pressedCommand={(command) => setCommand(command)} />
-        <AltitudeSelector pressedAltitude={(altValue) => setAltitude(altValue) } />
+        <MainFunctionButtons
+          pressedCommand={(command) => setCommand(command)}
+        />
+        <AltitudeSelector
+          pressedAltitude={(altValue) => setAltitude(altValue)}
+        />
       </View>
     </>
   );
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 10,
     opacity: 0.7,
-  }
+  },
 });
 
 export default App;
